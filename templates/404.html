@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}Plant Not Found - Talk to a Tree{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-visual" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="error-tree">
+                    <path d="M60 100 Q40 60 60 40 Q80 60 60 100" fill="none" stroke="#8F7A5C" stroke-width="8" stroke-linecap="round"/>
+                    <path d="M60 40 Q55 20 60 10 Q65 20 60 40" fill="#6B8E5A"/>
+                    <circle cx="60" cy="70" r="15" fill="#A8C47A"/>
+                    <circle cx="45" cy="55" r="10" fill="#8FBC6B"/>
+                    <circle cx="75" cy="55" r="12" fill="#7AB85A"/>
+                </svg>
+            </div>
+            <h1 class="error-code">404</h1>
+            <h2 class="error-title">Plant Not Found</h1>
+            <p class="error-message">🌱 I couldn't find "{{ plant_name }}" in my current botanical library.</p>
+            <p class="error-hint">It might be spelled differently, or it's not in our collection yet.</p>
+            <div class="error-actions">
+                <a href="/explore" class="btn btn-primary">Explore All Plants</a>
+                <a href="/" class="btn btn-secondary">Go Home</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

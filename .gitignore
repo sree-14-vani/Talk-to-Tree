@@ -1,0 +1,30 @@
+# Python
+env/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Environment files
+.env
+.env.*
+
+# IDE/editor
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Local app generated data
+uploads/
+vector_store/
+*.sqlite3
+flask_output.log
+
+# Optional: keep runtime caches out
+.pytest_cache/
+.mypy_cache/

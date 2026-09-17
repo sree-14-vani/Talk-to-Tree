@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block title %}Explore Plants - Talk to a Tree{% endblock %}
+
+{% block content %}
+<section class="explore-hero">
+    <div class="container">
+        <h1 class="explore-title">Explore Plants</h1>
+        <p class="explore-subtitle">Discover 15+ trees and plants. Search, filter, and dive deep into their stories.</p>
+    </div>
+</section>
+
+<section class="explore-filters" aria-labelledby="filters-title">
+    <div class="container">
+        <div class="filters-bar">
+            <div class="search-group" role="search">
+                <label for="explore-search" class="visually-hidden">Search plants</label>
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4.3-4.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+                    <input type="search" id="explore-search" class="search-input" placeholder="Search plants..." autocomplete="off" aria-label="Search plants by name">
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <label for="type-filter" class="visually-hidden">Filter by plant type</label>
+                <select id="type-filter" class="filter-select" aria-label="Filter by plant type">
+                    <option value="">All Types</option>
+                    {% for pt in plant_types %}
+                    <option value="{{ pt }}">{{ pt }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="habitat-filter" class="visually-hidden">Filter by habitat</label>
+                <select id="habitat-filter" class="filter-select" aria-label="Filter by habitat">
+                    <option value="">All Habitats</option>
+                    <option value="tropical">Tropical</option>
+                    <option value="subtropical">Subtropical</option>
+                    <option value="dry">Dry/Arid</option>
+                    <option value="coastal">Coastal</option>
+                    <option value="riverbank">Riverbank</option>
+                    <option value="forest">Forest</option>
+                </select>
+            </div>
+
+            <button class="btn btn-secondary" id="clear-filters" aria-label="Clear all filters">Clear</button>
+        </div>
+
+        <div class="filters-status" aria-live="polite">
+            <span id="results-count">{{ plants|length }} plants found</span>
+            <span id="active-filters" class="active-filters" hidden></span>
+        </div>
+    </div>
+</section>
+
+<section class="explore-grid-section" aria-labelledby="grid-title">
+    <div class="container">
+        <div class="plants-grid" id="plants-grid" role="list" aria-label="Plant collection">
+            {% for plant in plants %}
+            <article class="plant-card" role="listitem" data-name="{{ plant.name }}" data-type="{{ plant.plant_type }}" data-habitat="{{ plant.habitat }}">
+                <div class="plant-card-visual" aria-hidden="true">
+                    <div class="plant-silhouette" data-plant="{{ plant.name|lower }}"></div>
+                    <div class="plant-card-overlay">
+                        <a href="/plant/{{ plant.name }}" class="btn btn-primary">Explore</a>
+                    </div>
+                </div>
+                <div class="plant-card-content">
+                    <h3 class="plant-card-name">{{ plant.name }}</h3>
+                    <p class="plant-card-scientific">{{ plant.scientific_name }}</p>
+                    <div class="plant-card-tags">
+                        <span class="tag tag-type">{{ plant.plant_type }}</span>
+                        <span class="tag tag-family">{{ plant.family }}</span>
+                    </div>
+                    <p class="plant-card-description">{{ plant.description }}</p>
+                    <a href="/plant/{{ plant.name }}" class="btn btn-text btn-small">View Profile →</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+
+        <div class="empty-state" id="empty-state" hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+            <h3>No plants found</h3>
+            <p>Try adjusting your search or filters</p>
+            <button class="btn btn-secondary" id="reset-filters">Reset Filters</button>
+        </div>
+    </div>
+</section>
+
+<section class="explore-cta">
+    <div class="container">
+        <h2>Want to Identify a Plant?</h2>
+        <p>Upload a photo and let our AI identify it for you.</p>
+        <a href="#identify" class="btn btn-primary btn-large">Identify a Plant</a>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    window.allPlants = {{ plants|tojson }};
+    window.demoMode = {{ 'true' if demo_mode else 'false' }};
+</script>
+{% endblock %}

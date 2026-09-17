@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}Talk to a Tree - Discover the Stories Hidden in Plants{% endblock %}
+
+{% block content %}
+<section class="hero" aria-labelledby="hero-title">
+    <div class="hero-background">
+        <div class="hero-pattern"></div>
+        <div class="hero-glow"></div>
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-text">
+            <h1 id="hero-title" class="hero-title">TALK TO A TREE</h1>
+            <p class="hero-subtitle">Discover the stories, science, and secrets hidden in the plants around us.</p>
+
+            <div class="hero-search" role="search" aria-label="Plant search">
+                <div class="search-wrapper">
+                    <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="11" cy="11" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <path d="M21 21l-4.3-4.3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <input
+                        type="search"
+                        id="hero-search-input"
+                        class="search-input"
+                        placeholder="Search a tree or plant..."
+                        autocomplete="off"
+                        aria-label="Search for a plant or tree"
+                    >
+                    <div class="search-suggestions" id="search-suggestions" role="listbox" aria-label="Search suggestions"></div>
+                </div>
+            </div>
+
+            <div class="hero-cta-group">
+                <a href="/explore" class="btn btn-primary btn-large" aria-label="Explore all plants">
+                    <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M21 13v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="16 8 21 3 21 8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <line x1="3" y1="21" x2="9" y2="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Explore Nature
+                </a>
+                <a href="#identify" class="btn btn-secondary btn-large" aria-label="Identify a plant from image">
+                    <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" fill="none" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/>
+                        <polyline points="21 15 16 10 5 21" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Identify a Plant
+                </a>
+            </div>
+
+            <div class="hero-suggestions" aria-label="Popular plant suggestions">
+                <span class="suggestions-label">Popular:</span>
+                <div class="suggestion-chips" role="group" aria-label="Popular plant suggestions">
+                    <button class="suggestion-chip" data-plant="Banyan" aria-label="Search for Banyan">🌳 Banyan</button>
+                    <button class="suggestion-chip" data-plant="Neem" aria-label="Search for Neem">🌿 Neem</button>
+                    <button class="suggestion-chip" data-plant="Peepal" aria-label="Search for Peepal">🍃 Peepal</button>
+                    <button class="suggestion-chip" data-plant="Mango" aria-label="Search for Mango">🥭 Mango</button>
+                    <button class="suggestion-chip" data-plant="Bamboo" aria-label="Search for Bamboo">🎋 Bamboo</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Sunlight through a leafy forest">
+            <div class="hero-image-card">
+                <img src="https://images.unsplash.com/photo-1511497584788-876760111969?auto=format&fit=crop&w=1200&q=85" alt="Sunlight filtering through a leafy forest">
+                <div class="hero-image-caption">
+                    <span class="caption-kicker">FIELD NOTE 01</span>
+                    <strong>Every leaf has a story.</strong>
+                    <span>Science, culture, and living systems.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-scroll-indicator" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polyline points="6 9 12 15 18 9"/>
+        </svg>
+    </div>
+</section>
+
+<section class="features" aria-labelledby="features-title">
+    <div class="container">
+        <h2 id="features-title" class="section-title">Ways to Explore</h2>
+        <div class="features-grid">
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                    </svg>
+                </div>
+                <h3>Plant Profiles</h3>
+                <p>Beautiful, detailed profiles for 15+ trees and plants with scientific, ecological, and cultural information.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                </div>
+                <h3>Ask the Tree</h3>
+                <p>Have a conversation with any plant using RAG-powered AI grounded in verified botanical knowledge.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                </div>
+                <h3>Identify Plants</h3>
+                <p>Upload a photo to identify a plant and instantly access its complete knowledge profile.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="18" y1="20" x2="18" y2="10"/>
+                        <line x1="12" y1="20" x2="12" y2="4"/>
+                        <line x1="6" y1="20" x2="6" y2="14"/>
+                    </svg>
+                </div>
+                <h3>Compare Plants</h3>
+                <p>Side-by-side comparison of any two plants across scientific, ecological, and cultural dimensions.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </div>
+                <h3>Nature Facts</h3>
+                <p>Discover surprising, verified facts from the botanical world with a single click.</p>
+            </article>
+
+            <article class="feature-card">
+                <div class="feature-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                        <circle cx="9" cy="7" r="4"/>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                    </svg>
+                </div>
+                <h3>Knowledge Stories</h3>
+                <p>Immersive narratives weaving together science, ecology, and culture for each plant.</p>
+            </article>
+        </div>
+    </div>
+</section>
+
+<section class="featured-plants" aria-labelledby="featured-title">
+    <div class="container">
+        <div class="section-header">
+            <h2 id="featured-title" class="section-title">Featured Plants</h2>
+            <a href="/explore" class="btn btn-text">View All Plants →</a>
+        </div>
+
+        <div class="plants-carousel" role="list" aria-label="Featured plants">
+            {% for plant in featured_plants %}
+            <article class="plant-card" role="listitem">
+                <div class="plant-card-visual" aria-hidden="true">
+                    <div class="plant-silhouette" data-plant="{{ plant.name|lower }}"></div>
+                </div>
+                <div class="plant-card-content">
+                    <h3 class="plant-card-name">{{ plant.name }}</h3>
+                    <p class="plant-card-scientific">{{ plant.scientific_name }}</p>
+                    <p class="plant-card-type">{{ plant.plant_type }} • {{ plant.family }}</p>
+                    <p class="plant-card-description">{{ plant.description }}</p>
+                    <a href="/plant/{{ plant.name }}" class="btn btn-text btn-small">Explore →</a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<section class="cta-section" aria-labelledby="cta-title">
+    <div class="container">
+        <div class="cta-content">
+            <h2 id="cta-title">Ready to Talk to a Tree?</h2>
+            <p>Start your botanical journey today. Search for a plant, ask it questions, and discover the hidden world of trees.</p>
+            <div class="cta-actions">
+                <a href="/explore" class="btn btn-primary btn-large">Begin Exploring</a>
+                <a href="#identify" class="btn btn-outline btn-large">Try Identification</a>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

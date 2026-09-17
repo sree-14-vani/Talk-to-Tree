@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Server Error - Talk to a Tree{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="container">
+        <div class="error-content">
+            <div class="error-visual" aria-hidden="true">
+                <svg viewBox="0 0 120 120" class="error-leaf">
+                    <path d="M60 10 Q80 30 70 60 Q85 85 60 100 Q35 85 50 60 Q40 30 60 10" fill="#6B8E5A"/>
+                    <path d="M60 100 L60 60" stroke="#4A6E3A" stroke-width="3"/>
+                    <path d="M60 60 Q45 50 30 40" stroke="#4A6E3A" stroke-width="2" fill="none"/>
+                    <path d="M60 60 Q75 50 90 40" stroke="#4A6E3A" stroke-width="2" fill="none"/>
+                </svg>
+            </div>
+            <h1 class="error-code">500</h1>
+            <h2 class="error-title">Server Error</h1>
+            <p class="error-message">🌿 Something went wrong on our end.</p>
+            <p class="error-hint">The AI service might be temporarily unavailable, but you can still explore the plant library.</p>
+            <div class="error-actions">
+                <a href="/explore" class="btn btn-primary">Explore Plants</a>
+                <button class="btn btn-secondary" onclick="window.location.reload()">Try Again</button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

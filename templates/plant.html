@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block title %}{{ plant.name }} - Talk to a Tree{% endblock %}
+
+{% block extra_head %}
+<style>
+</style>
+{% endblock %}
+
+{% block content %}
+<article class="plant-page">
+    <header class="plant-hero">
+        <div class="plant-hero-background">
+            <div class="plant-hero-pattern"></div>
+        </div>
+
+        <div class="container plant-hero-content">
+            <div class="plant-visual">
+                <div class="plant-cartoon-stage plant-{{ plant.name|lower|replace(' ', '-') }}" role="img" aria-label="Cartoon {{ plant.name }} tree">
+                    <div class="cartoon-sun" aria-hidden="true"></div>
+                    <div class="cartoon-cloud cartoon-cloud-one" aria-hidden="true"></div>
+                    <div class="cartoon-cloud cartoon-cloud-two" aria-hidden="true"></div>
+                    <div class="cartoon-tree" aria-hidden="true">
+                        <div class="cartoon-canopy cartoon-canopy-back"></div>
+                        <div class="cartoon-trunk">
+                            <div class="cartoon-face">
+                                <span class="cartoon-eye cartoon-eye-left"></span>
+                                <span class="cartoon-eye cartoon-eye-right"></span>
+                                <span class="cartoon-mouth"></span>
+                            </div>
+                        </div>
+                        <div class="cartoon-canopy cartoon-canopy-front">
+                            <span class="cartoon-leaf leaf-a"></span>
+                            <span class="cartoon-leaf leaf-b"></span>
+                            <span class="cartoon-leaf leaf-c"></span>
+                            <span class="cartoon-leaf leaf-d"></span>
+                        </div>
+                        <span class="cartoon-arm cartoon-arm-left"></span>
+                        <span class="cartoon-arm cartoon-arm-right"></span>
+                    </div>
+                    <div class="plant-cartoon-label">
+                        <span>MEET THE TREE</span>
+                        <strong>{{ plant.name }}</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="plant-hero-info">
+                <nav class="plant-breadcrumb" aria-label="Breadcrumb">
+                    <a href="/">Home</a>
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    <a href="/explore">Explore</a>
+                    <svg aria-hidden="true" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                    <span aria-current="page">{{ plant.name }}</span>
+                </nav>
+
+                <h1 class="plant-name">{{ plant.name }}</h1>
+                <p class="plant-scientific">{{ plant.scientific_name }}</p>
+                <p class="plant-tagline">"Nature's living architecture"</p>
+
+                <div class="plant-meta">
+                    <span class="meta-item"><strong>Type:</strong> {{ plant.plant_type }}</span>
+                    <span class="meta-item"><strong>Family:</strong> {{ plant.family }}</span>
+                    <span class="meta-item"><strong>Native to:</strong> {{ plant.native_distribution }}</span>
+                </div>
+
+                <div class="plant-actions">
+                    <button class="btn btn-primary" id="story-btn" aria-label="Generate knowledge story">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                        🌳 Tell Me Its Story
+                    </button>
+                    <button class="btn btn-secondary" id="fact-btn" aria-label="Get random fact about this plant">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                        🌿 Nature Fact
+                    </button>
+                </div>
+
+                <section class="tree-narrator" aria-labelledby="narrator-title">
+                    <div class="narrator-heading">
+                        <span class="narrator-pulse" aria-hidden="true"></span>
+                        <div>
+                            <span class="eyebrow">LISTEN & LEARN</span>
+                            <h2 id="narrator-title">Let {{ plant.name }} introduce itself</h2>
+                        </div>
+                    </div>
+                    <p id="narrator-status" class="narrator-status" aria-live="polite">Ready when you are.</p>
+                    <label class="narrator-language-label" for="narrator-language">Speaking language</label>
+                    <select id="narrator-language" class="narrator-language" aria-label="Choose speaking language">
+                        <option value="en-US">English</option>
+                        <option value="hi-IN">Hindi</option>
+                        <option value="bn-IN">Bengali</option>
+                        <option value="ta-IN">Tamil</option>
+                        <option value="te-IN">Telugu</option>
+                        <option value="kn-IN">Kannada</option>
+                        <option value="es-ES">Spanish</option>
+                        <option value="fr-FR">French</option>
+                        <option value="de-DE">German</option>
+                        <option value="pt-BR">Portuguese</option>
+                        <option value="ar-SA">Arabic</option>
+                        <option value="zh-CN">Chinese</option>
+                        <option value="ja-JP">Japanese</option>
+                    </select>
+                    <div class="narrator-controls" role="group" aria-label="Narration controls">
+                        <button type="button" class="narrator-button narrator-button-primary" id="narrator-play" aria-label="Start narration">
+                            <span aria-hidden="true">▶</span> Start speaking
+                        </button>
+                        <button type="button" class="narrator-button" id="narrator-pause" aria-label="Pause narration" disabled>
+                            <span aria-hidden="true">Ⅱ</span> Pause
+                        </button>
+                        <button type="button" class="narrator-button" id="narrator-stop" aria-label="Stop narration" disabled>
+                            <span aria-hidden="true">■</span> Stop
+                        </button>
+                    </div>
+                    <details class="narrator-transcript">
+                        <summary>Read the full introduction</summary>
+                        <p id="narrator-transcript-text"></p>
+                    </details>
+                </section>
+            </div>
+        </div>
+    </header>
+
+    <div class="container plant-content">
+        <div class="plant-grid">
+            <section class="plant-profile" aria-labelledby="profile-title">
+                <section class="use-guide" aria-labelledby="use-guide-title">
+                    <div class="use-guide-heading">
+                        <span class="eyebrow">DOCUMENTED NOTES</span>
+                        <h2 id="use-guide-title">Plant parts, uses & cautions</h2>
+                    </div>
+                    <p class="use-guide-warning">This is an educational summary of the local plant notes, not medical advice. A part is not safe to eat or use because it is listed here. Verify with a qualified medical professional before ingestion or treatment.</p>
+                    <div class="use-guide-grid">
+                        <div class="plant-parts-illustration" role="img" aria-label="Illustration of plant parts: leaf, fruit, stem, root, and seed">
+                            <div class="parts-crown"></div>
+                            <div class="parts-stem"></div>
+                            <div class="parts-root parts-root-left"></div>
+                            <div class="parts-root parts-root-right"></div>
+                            <span class="parts-label parts-label-leaf">Leaf</span>
+                            <span class="parts-label parts-label-fruit">Fruit / seed</span>
+                            <span class="parts-label parts-label-root">Root</span>
+                            <span class="parts-label parts-label-note">Check the notes before use</span>
+                        </div>
+                        <article class="use-guide-item use-guide-food">
+                            <span class="use-guide-icon" aria-hidden="true">◉</span>
+                            <div>
+                                <h3>Food or internal use</h3>
+                                <p>{{ plant.sections.get('Interesting Facts', 'No food-use information is documented for this plant.') }}</p>
+                            </div>
+                        </article>
+                        <article class="use-guide-item use-guide-medical">
+                            <span class="use-guide-icon" aria-hidden="true">＋</span>
+                            <div>
+                                <h3>Traditional or medicinal notes</h3>
+                                <p>{{ plant.sections.get('Cultural Historical Significance', 'No medicinal-use information is documented for this plant.') }}</p>
+                            </div>
+                        </article>
+                        <article class="use-guide-item use-guide-caution">
+                            <span class="use-guide-icon" aria-hidden="true">!</span>
+                            <div>
+                                <h3>Do not assume safe</h3>
+                                <p>{{ plant.safety_note }}</p>
+                            </div>
+                        </article>
+                    </div>
+                </section>
+                <div class="profile-cards">
+                    {% for section_name, section_content in plant.sections.items() %}
+                    {% if section_name in ['Scientific Profile', 'Habitat', 'Ecological Importance', 'Cultural Historical Significance', 'Interesting Facts', 'Conservation Information', 'General Care', 'Growth Characteristics', 'Appearance', 'Environmental Requirements', 'Role in Biodiversity', 'Ecological Role', 'Safety Notes'] or 'medical' in section_name|lower or 'medicin' in section_name|lower or 'toxic' in section_name|lower or 'benefit' in section_name|lower %}
+                    <div class="profile-card" data-section="{{ section_name|lower|replace(' ', '-') }}">
+                        <header class="card-header">
+                            <span class="card-icon" aria-hidden="true">
+                                {% if 'Scientific' in section_name %}🌱
+                                {% elif 'Habitat' in section_name %}🌍
+                                {% elif 'Ecological' in section_name or 'Biodiversity' in section_name or 'Role' in section_name %}🐦
+                                {% elif 'Cultural' in section_name %}🏛️
+                                {% elif 'Interesting' in section_name or 'Facts' in section_name %}✨
+                                {% elif 'Conservation' in section_name %}🛡️
+                                {% elif 'Care' in section_name %}🌱
+                                {% elif 'Growth' in section_name %}📈
+                                {% elif 'Appearance' in section_name %}👁️
+                                {% elif 'Environmental' in section_name %}☀️
+                                {% elif 'Safety' in section_name %}⚠️
+                                {% else %}📄
+                                {% endif %}
+                            </span>
+                            <h3 class="card-title">{{ section_name }}</h3>
+                        </header>
+                        <div class="card-content">
+                            {{ section_content|replace('\n', '<br>')|safe }}
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+                {% if plant.safety_note %}
+                <div class="safety-notice">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <p>{{ plant.safety_note }}</p>
+                </div>
+                {% endif %}
+            </section>
+
+            <aside class="plant-sidebar" aria-labelledby="sidebar-title">
+                <div class="sidebar-card info-nodes" id="info-nodes">
+                    <h3 id="sidebar-title" class="sidebar-title">Explore Topics</h3>
+                    <div class="info-node-group">
+                        {% for section_name in ['Scientific Profile', 'Habitat', 'Ecological Importance', 'Cultural Historical Significance', 'Interesting Facts', 'Conservation Information'] %}
+                        {% if section_name in plant.sections %}
+                        <button class="info-node" data-target="{{ section_name|lower|replace(' ', '-') }}" aria-label="Jump to {{ section_name }}">
+                            <span class="node-icon" aria-hidden="true">
+                                {% if 'Scientific' in section_name %}🌱
+                                {% elif 'Habitat' in section_name %}🌍
+                                {% elif 'Ecological' in section_name %}🐦
+                                {% elif 'Cultural' in section_name %}🏛️
+                                {% elif 'Interesting' in section_name %}✨
+                                {% elif 'Conservation' in section_name %}🛡️
+                                {% else %}📄
+                                {% endif %}
+                            </span>
+                            <span class="node-label">{{ section_name }}</span>
+                        </button>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="sidebar-card chat-section" id="chat-section">
+                    <h3 class="sidebar-title">Ask the Tree 🌳</h3>
+                    <p class="chat-subtitle">Have a conversation with {{ plant.name }}</p>
+
+                    <div class="chat-container" id="chat-container" role="log" aria-live="polite" aria-label="Chat with {{ plant.name }}">
+                        <div class="chat-message bot">
+                            <div class="message-avatar" aria-hidden="true">🌳</div>
+                            <div class="message-content">
+                                <p>Hello! I'm a {{ plant.name }}. Ask me anything about my life, ecology, or cultural significance.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="chat-suggestions" id="chat-suggestions" role="group" aria-label="Suggested questions">
+                        {% for q in suggested_questions %}
+                        <button class="suggestion-btn" data-question="{{ q }}">{{ q }}</button>
+                        {% endfor %}
+                    </div>
+
+                    <form class="chat-input-form" id="chat-form" aria-label="Ask a question">
+                        <input
+                            type="text"
+                            id="chat-input"
+                            class="chat-input"
+                            placeholder="Ask {{ plant.name }} a question..."
+                            autocomplete="off"
+                            aria-label="Your question"
+                        >
+                        <button type="submit" class="btn btn-primary btn-icon" aria-label="Send question">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                        </button>
+                    </form>
+
+                    <div class="chat-status" id="chat-status" aria-live="polite"></div>
+                </div>
+
+                <div class="sidebar-card compare-section">
+                    <h3 class="sidebar-title">Compare Plants</h3>
+                    <form id="compare-form" class="compare-form">
+                        <div class="form-group">
+                            <label for="compare-plant1">Plant 1</label>
+                            <select id="compare-plant1" name="plant1" required>
+                                <option value="{{ plant.name }}" selected>{{ plant.name }}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="compare-plant2">Plant 2</label>
+                            <select id="compare-plant2" name="plant2" required>
+                                <option value="">Select a plant...</option>
+                                {% for other_plant in all_plants %}
+                                {% if other_plant.name != plant.name %}
+                                <option value="{{ other_plant.name }}">{{ other_plant.name }}</option>
+                                {% endif %}
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Compare</button>
+                    </form>
+                    <div id="compare-result" class="compare-result"></div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <div class="chat-sources-modal" id="sources-modal" role="dialog" aria-modal="true" aria-labelledby="sources-title" hidden>
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <header class="modal-header">
+                <h3 id="sources-title">📚 Sources Used</h3>
+                <button class="modal-close" aria-label="Close sources">&times;</button>
+            </header>
+            <div class="modal-body" id="sources-body"></div>
+        </div>
+    </div>
+</article>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    window.plantName = "{{ plant.name }}";
+    window.plantProfile = {{ plant|tojson }};
+    window.allPlants = {{ all_plants|tojson }};
+    window.demoMode = {{ 'true' if demo_mode else 'false' }};
+</script>
+{% endblock %}
