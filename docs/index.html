@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Talk to Tree</title>
+    <style>
+      :root {
+        --bg: #f3f6ef;
+        --panel: #ffffff;
+        --primary: #1d5b3f;
+        --accent: #8fbf6a;
+        --text: #1f2d24;
+        --muted: #5d6f66;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(180deg, var(--bg), #edf7ea);
+        color: var(--text);
+      }
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 60px 24px 80px;
+      }
+      .card {
+        background: var(--panel);
+        border-radius: 18px;
+        padding: 32px;
+        box-shadow: 0 12px 30px rgba(29, 91, 63, 0.08);
+      }
+      h1 {
+        margin-top: 0;
+        color: var(--primary);
+        font-size: clamp(2.2rem, 4vw, 3.5rem);
+      }
+      p {
+        line-height: 1.7;
+        color: var(--muted);
+        font-size: 1.05rem;
+      }
+      .badge {
+        display: inline-block;
+        background: rgba(143, 191, 106, 0.18);
+        color: var(--primary);
+        border-radius: 999px;
+        padding: 8px 14px;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      a.button {
+        text-decoration: none;
+        background: var(--primary);
+        color: white;
+        padding: 12px 18px;
+        border-radius: 12px;
+        font-weight: 700;
+      }
+      a.secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="card">
+        <div class="badge">Botanical Explorer</div>
+        <h1>Talk to Tree</h1>
+        <p>
+          Explore Indian tree species through a guided botanical knowledge experience.
+          This project brings together plant discovery, conversational learning, and local knowledge retrieval in a simple Flask application.
+        </p>
+        <p>
+          Browse the tree catalog, ask questions about ecology and usage, and discover how each species fits into culture, habitat, and biodiversity.
+        </p>
+        <div class="actions">
+          <a class="button" href="https://github.com/sree-14-vani/Talk-to-Tree">View on GitHub</a>
+          <a class="button secondary" href="https://github.com/sree-14-vani/Talk-to-Tree#readme">Read the README</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
